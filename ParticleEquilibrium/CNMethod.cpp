@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CNMethod.h"
 
+//This function is called automatically at the start and inputs the default values used for the calculations
 CNMethod::CNMethod()
 {
 	//Sets the default values for the inputs
@@ -15,7 +16,7 @@ CNMethod::CNMethod()
 
 	k = 0.152;
 	Fcs = 0.1466;
-	Los = 15.2 / 2.54;
+	Los = 15.2 / 2.54;//Los was measured in cm so we had to convert it to inches
 }
 
 CNMethod::~CNMethod()
@@ -23,6 +24,7 @@ CNMethod::~CNMethod()
 
 }
 
+//Newton's method is executed here 
 void CNMethod::calculate()
 {
 
@@ -40,12 +42,9 @@ void CNMethod::calculate()
 	float secondguess_Xc = 0;
 	float secondguess_Yc = 0;
 
-	Blue_Ls = sqrt(pow((blue_Xs - guess_Xc), 2) + pow((blue_Ys - guess_Yc), 2));
-	Red_Ls = sqrt(pow((red_Xs - guess_Xc), 2) + pow((red_Ys - guess_Yc), 2));
-	Green_Ls = sqrt(pow((green_Xs - guess_Xc), 2) + pow((green_Ys - guess_Yc), 2));
 	lambda = Fcs - (k * Los);
 
-
+	//performs Newton's Method calculations 4 times
 	for (int index = 0; index < 4; index++)
 	{
 		Blue_Ls = sqrt(pow((blue_Xs - guess_Xc), 2) + pow((blue_Ys - guess_Yc), 2));
@@ -126,10 +125,11 @@ void CNMethod::calculate()
 	guess_Yc = guess_Ycm;
 	*/
 
-	std::cout << "The center is located at: " << "(" << guess_Xc << ", " << guess_Yc << ")" << std::endl;
+	std::cout << "The center is located at: " << "(" << guess_Xc << ", " << guess_Yc << ")" << std::endl; //prints the answer to the screen
 	CNMethod::main_menu();
 }
 
+//this function enalbes the user to change the parameters set by the programing in the begining
 void CNMethod::input_var()
 {
 	using namespace std;
@@ -157,14 +157,14 @@ void CNMethod::input_var()
 	{
 		cout << "Enter the x position of the Red spring in inches: ";
 		cin >> red_Xs;
-		while (red_Xs > 24 || red_Xs < 0)
+		while (red_Xs > 24 || red_Xs < 0) //Error checking ensures that the value entered cannot be smaller than 0 or bigger than 24
 		{
 			cout << "Please enter a value between 0 and 24 inches: ";
 			cin >> red_Xs;
 		}
 		cout << "Enter the y position of the Red spring in inches: ";
 		cin >> red_Ys;
-		while (red_Ys > 24 || red_Ys < 0)
+		while (red_Ys > 24 || red_Ys < 0)//Error checking ensures that the value entered cannot be smaller than 0 or bigger than 24
 		{
 			cout << "Please enter a value between 0 and 24 inches: ";
 			cin >> red_Ys;
@@ -174,14 +174,14 @@ void CNMethod::input_var()
 	{
 		cout << "Enter the x position of the Red spring in inches: ";
 		cin >> green_Xs;
-		while (green_Xs > 24 || green_Xs < 0)
+		while (green_Xs > 24 || green_Xs < 0)//Error checking ensures that the value entered cannot be smaller than 0 or bigger than 24
 		{
 			cout << "Please enter a value between 0 and 24 inches: ";
 			cin >> green_Xs;
 		}
 		cout << "Enter the y position of the Green spring in inches: ";
 		cin >> green_Ys;
-		while (green_Ys > 24 || green_Ys < 0)
+		while (green_Ys > 24 || green_Ys < 0)//Error checking ensures that the value entered cannot be smaller than 0 or bigger than 24
 		{
 			cout << "Please enter a value between 0 and 24 inches: ";
 			cin >> green_Ys;
@@ -191,14 +191,14 @@ void CNMethod::input_var()
 	{
 		cout << "Enter the x position of the Red spring in inches: ";
 		cin >> blue_Xs;
-		while (blue_Xs > 24 || blue_Xs < 0)
+		while (blue_Xs > 24 || blue_Xs < 0)//Error checking ensures that the value entered cannot be smaller than 0 or bigger than 24
 		{
 			cout << "Please enter a value between 0 and 24 inches: ";
 			cin >> blue_Xs;
 		}
 		cout << "Enter the y position of the Green spring in inches: ";
 		cin >> blue_Ys;
-		while (blue_Ys > 24 || blue_Ys < 0)
+		while (blue_Ys > 24 || blue_Ys < 0)//Error checking ensures that the value entered cannot be smaller than 0 or bigger than 24
 		{
 			cout << "Please enter a value between 0 and 24 inches: ";
 			cin >> blue_Ys;
@@ -211,7 +211,7 @@ void CNMethod::input_var()
 		cin >> guess_Xc;
 		cout << "Enter the guess for the Y co-ordinate in inches: ";
 		cin >> guess_Yc;
-		while (Blue_Ls < Los || Green_Ls < Los || Red_Ls < Los)
+		while (Blue_Ls < Los || Green_Ls < Los || Red_Ls < Los)//Checks to make sure Ls for each spring is not larger than Los
 		{
 			if (Blue_Ls < Los)
 			{
@@ -240,6 +240,7 @@ void CNMethod::input_var()
 	CNMethod::main_menu();
 }
 
+//this function prints the main menu to the screen
 void CNMethod::main_menu()
 {
 	using namespace std; 
@@ -256,6 +257,7 @@ void CNMethod::main_menu()
 	cout << "(Q)uit" << endl;
 }
 
+//this function was used to simply help me test things quickly without having to rewrite significant porptions of code
 void CNMethod::test()
 {
 	using namespace std;
