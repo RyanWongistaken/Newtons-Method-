@@ -27,7 +27,7 @@ CNMethod::CNMethod()
 	red_Los = 15.2 / 2.54;//feet
 	
 	green_k = 0.152;//US customary
-	green_Fcs = 0.1466;//US customary
+	green_Fcs = 0.1466;//US customar
 	green_Los = 15.2 / 2.54;//feet
 }
 
