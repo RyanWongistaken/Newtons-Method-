@@ -9,26 +9,26 @@
 CNMethod::CNMethod()
 {
 	//Sets the default values for the inputs
-	red_Xs = 14;
-	red_Ys = 3;
-	green_Xs = 1;
-	green_Ys = 0;
-	blue_Xs = 0;
-	blue_Ys = 21;
-	guess_Xc = 5;
-	guess_Yc = 9;
+	red_Xs = 14;//inches
+	red_Ys = 3;//inches
+	green_Xs = 1;//inches
+	green_Ys = 0;//inches
+	blue_Xs = 0;//inches
+	blue_Ys = 21;//inches
+	guess_Xc = 5;//iniches
+	guess_Yc = 9;//inches
 
-	blue_k = 0.152;
-	blue_Fcs = 0.1466;
-	blue_Los = 15.2 / 2.54;//Los was measured in cm so we had to convert it to inches
+	blue_k = 0.152;//US customary
+	blue_Fcs = 0.1466;//US customary
+	blue_Los = 15.2 / 2.54;//feet
 
-	red_k = 0.152;
-	red_Fcs = 0.1466;
-	red_Los = 15.2 / 2.54;//Los was measured in cm so we had to convert it to inches
+	red_k = 0.152;//US customary
+	red_Fcs = 0.1466;//US customary
+	red_Los = 15.2 / 2.54;//feet
 	
-	green_k = 0.152;
-	green_Fcs = 0.1466;
-	green_Los = 15.2 / 2.54;//Los was measured in cm so we had to convert it to inches
+	green_k = 0.152;//US customary
+	green_Fcs = 0.1466;//US customary
+	green_Los = 15.2 / 2.54;//feet
 }
 
 CNMethod::~CNMethod()
@@ -43,8 +43,6 @@ CNMethod::~CNMethod()
 */
 void CNMethod::calculate()
 {
-
-
 	float PhiX;
 	float PhiY;
 	float dxdx;
@@ -57,6 +55,19 @@ void CNMethod::calculate()
 
 	float secondguess_Xc = 0;
 	float secondguess_Yc = 0;
+
+	//convert from inches to ft
+	blue_Xs = blue_Xs / 12;
+	blue_Ys = blue_Ys / 12;
+
+	red_Xs = red_Xs / 12;
+	red_Ys = red_Ys / 12;
+
+	green_Xs = green_Xs / 12;
+	green_Ys = green_Ys / 12;
+
+	
+
 
 	blue_lambda = blue_Fcs - (blue_k * blue_Los);
 	red_lambda = red_Fcs - (red_k * red_Los);
@@ -110,7 +121,15 @@ void CNMethod::calculate()
 	red_angle = acos((red_Xs - guess_Xc) / Red_Ls) * 180.0 / PI;
 	green_angle = acos((green_Xs - guess_Xc) / Green_Ls) * 180.0 / PI;
 
+	//convert from ft to inches
+	blue_Xs = blue_Xs * 12;
+	blue_Ys = blue_Ys * 12;
 
+	red_Xs = red_Xs * 12;
+	red_Ys = red_Ys * 12;
+
+	green_Xs = green_Xs * 12;
+	green_Ys = green_Ys * 12;
 
 	std::cout << "\nThe center is located at: " << "(" << guess_Xc << ", " << guess_Yc << ")" << std::endl; //prints the answer to the screen
 	std::cout << "      Force[lbf] Length[in] Angle[Degrees]" << std::endl;
@@ -132,9 +151,6 @@ void CNMethod::input_var()
 	float Blue_Ls;
 	float Red_Ls;
 	float Green_Ls;
-	Blue_Ls = sqrt(pow((blue_Xs - guess_Xc), 2) + pow((blue_Ys - guess_Yc), 2));
-	Red_Ls = sqrt(pow((red_Xs - guess_Xc), 2) + pow((red_Ys - guess_Yc), 2));
-	Green_Ls = sqrt(pow((green_Xs - guess_Xc), 2) + pow((green_Ys - guess_Yc), 2));
 
 	cout << "\nWhat value would you like to edit?" << endl;
 	cout << "(I)nital guess values" << endl;
@@ -168,7 +184,7 @@ void CNMethod::input_var()
 		cin >> red_k;
 		cout << "Enter the Fcs value for the Red spring in imperial units: ";
 		cin >> red_Fcs;
-		cout << "Enter the Los value for the Red Spring in inches: ";
+		cout << "Enter the Los value for the Red Spring in ft: ";
 		cin >> red_Los;
 	}
 	else if (choice[0] == 'G' || choice[0] == 'g')
@@ -191,7 +207,7 @@ void CNMethod::input_var()
 		cin >> green_k;
 		cout << "Enter the Fcs value for the Green spring in imperial units: ";
 		cin >> green_Fcs;
-		cout << "Enter the Los value for the Green Spring in inches: ";
+		cout << "Enter the Los value for the Green Spring in ft: ";
 		cin >> green_Los;
 	}
 	else if (choice[0] == 'b' || choice[0] == 'B')
@@ -214,11 +230,25 @@ void CNMethod::input_var()
 		cin >> blue_k;
 		cout << "Enter the Fcs value for the Blue spring in imperial units: ";
 		cin >> blue_Fcs;
-		cout << "Enter the Los value for the Blue Spring in inches: ";
+		cout << "Enter the Los value for the Blue Spring in ft: ";
 		cin >> blue_Los;
 	}
 	else if (choice[0] == 'I' || choice[0] == 'i')
 	{
+		//convert from inches to ft
+		blue_Xs = blue_Xs / 12;
+		blue_Ys = blue_Ys / 12;
+
+		red_Xs = red_Xs / 12;
+		red_Ys = red_Ys / 12;
+
+		green_Xs = green_Xs / 12;
+		green_Ys = green_Ys / 12;
+
+		Blue_Ls = sqrt(pow((blue_Ys - guess_Yc), 2) + pow((blue_Xs - guess_Xc), 2));
+		Red_Ls = sqrt(pow((red_Xs - guess_Xc), 2) + pow((red_Ys - guess_Yc), 2));
+		Green_Ls = sqrt(pow((green_Xs - guess_Xc), 2) + pow((green_Ys - guess_Yc), 2));
+
 		cout << "Enter the guess for the X co-ordinate in inches: ";
 		cin >> guess_Xc;
 		cout << "Enter the guess for the Y co-ordinate in inches: ";
@@ -246,7 +276,15 @@ void CNMethod::input_var()
 			Red_Ls = sqrt(pow((red_Xs - guess_Xc), 2) + pow((red_Ys - guess_Yc), 2));
 			Green_Ls = sqrt(pow((green_Xs - guess_Xc), 2) + pow((green_Ys - guess_Yc), 2));
 		}
+		//convert from ft to inches
+		blue_Xs = blue_Xs * 12;
+		blue_Ys = blue_Ys * 12;
 
+		red_Xs = red_Xs * 12;
+		red_Ys = red_Ys * 12;
+
+		green_Xs = green_Xs * 12;
+		green_Ys = green_Ys * 12;
 	}
 	CNMethod::main_menu();
 }
@@ -284,6 +322,17 @@ void CNMethod::test()
 	float ez;
 	float lmao;
 	
+	//convert from inches to ft
+	blue_Xs = blue_Xs / 12;
+	blue_Ys = blue_Ys / 12;
+
+	red_Xs = red_Xs / 12;
+	red_Ys = red_Ys / 12;
+
+	green_Xs = green_Xs / 12;
+	green_Ys = green_Ys / 12;
+
+
 	float Blue_Ls;
 	float Red_Ls;
 	float Green_Ls;
