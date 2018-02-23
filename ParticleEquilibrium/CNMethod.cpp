@@ -9,26 +9,27 @@
 CNMethod::CNMethod()
 {
 	//Sets the default values for the inputs
-	red_Xs = 14;//inches
-	red_Ys = 3;//inches
-	green_Xs = 1;//inches
-	green_Ys = 0;//inches
-	blue_Xs = 0;//inches
-	blue_Ys = 21;//inches
+	red_Xs = 11;//inches
+	red_Ys = 1;//inches
+	green_Xs = 0;//inches
+	green_Ys = 17;//inches
+	blue_Xs = 22;//inches
+	blue_Ys = 17;//inches
+
 	guess_Xc = 5;//iniches
 	guess_Yc = 9;//inches
 
-	blue_k = 0.152;//US customary
-	blue_Fcs = 0.1466;//US customary
-	blue_Los = 15.2 / 2.54;//feet
+	blue_k = 58.701;//US customary
+	blue_Fcs = 4.7189;//US customary
+	blue_Los = 0.486;//feet
 
-	red_k = 0.152;//US customary
-	red_Fcs = 0.1466;//US customary
-	red_Los = 15.2 / 2.54;//feet
+	red_k = 58.59;//US customary
+	red_Fcs = 5.4512;//US customary
+	red_Los = 0.489;//feet
 	
-	green_k = 0.152;//US customary
-	green_Fcs = 0.1466;//US customar
-	green_Los = 15.2 / 2.54;//feet
+	green_k = 59.477;//US customary
+	green_Fcs = 4.0924;//US customary
+	green_Los = 0.486;//feet
 }
 
 CNMethod::~CNMethod()
@@ -66,16 +67,18 @@ void CNMethod::calculate()
 	green_Xs = green_Xs / 12;
 	green_Ys = green_Ys / 12;
 
-	
+	guess_Xc = guess_Xc / 12;
+	guess_Yc = guess_Yc / 12;
 
 
-	blue_lambda = blue_Fcs - (blue_k * blue_Los);
-	red_lambda = red_Fcs - (red_k * red_Los);
-	green_lambda = green_Fcs - (green_k * green_Los);
 
 	//performs Newton's Method calculations 4 times inorder to determine the center 
 	for (int index = 0; index < 4; index++)
 	{
+		blue_lambda = blue_Fcs - (blue_k * blue_Los);
+		red_lambda = red_Fcs - (red_k * red_Los);
+		green_lambda = green_Fcs - (green_k * green_Los);
+
 		Blue_Ls = sqrt(pow((blue_Xs - guess_Xc), 2) + pow((blue_Ys - guess_Yc), 2));
 		Red_Ls = sqrt(pow((red_Xs - guess_Xc), 2) + pow((red_Ys - guess_Yc), 2));
 		Green_Ls = sqrt(pow((green_Xs - guess_Xc), 2) + pow((green_Ys - guess_Yc), 2));
@@ -107,6 +110,8 @@ void CNMethod::calculate()
 		secondguess_Xc = guess_Xc - (((PhiX * dydy) - (PhiY * dxdy)) / ((dxdx * dydy) - (dydx * dxdy)));
 		secondguess_Yc = guess_Yc - (((-1 * PhiX * dydx) + (PhiY * dxdx)) / ((dxdx * dydy) - (dydx * dxdy)));
 
+		/*guess_Xc = secondguess_Xc;
+		guess_Yc = secondguess_Yc;*/
 		guess_Xc = ((1 - 0.5) * guess_Xc) + (0.5 * secondguess_Xc);
 		guess_Yc = ((1 - 0.5) * guess_Yc) + (0.5 * secondguess_Yc);
 	}
@@ -131,8 +136,11 @@ void CNMethod::calculate()
 	green_Xs = green_Xs * 12;
 	green_Ys = green_Ys * 12;
 
+	guess_Xc = guess_Xc * 12;
+	guess_Yc = guess_Yc * 12;
+
 	std::cout << "\nThe center is located at: " << "(" << guess_Xc << ", " << guess_Yc << ")" << std::endl; //prints the answer to the screen
-	std::cout << "      Force[lbf] Length[in] Angle[Degrees]" << std::endl;
+	std::cout << "      Force[lbf] Length[ft] Angle[Degrees]" << std::endl;
 	std::cout << "Blue  " << blue_Ts << std::setw(11) << Blue_Ls << std::setw(11) << blue_angle << std::endl;
 	std::cout << "Green " << green_Ts << std::setw(11) << Green_Ls << std::setw(11) << green_angle << std::endl;
 	std::cout << "Red   " << red_Ts << std::setw(11) << Red_Ls << std::setw(11) << red_angle << std::endl;
