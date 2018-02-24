@@ -9,15 +9,15 @@
 CNMethod::CNMethod()
 {
 	//Sets the default values for the inputs
-	red_Xs = 11;//inches
-	red_Ys = 1;//inches
-	green_Xs = 0;//inches
-	green_Ys = 17;//inches
-	blue_Xs = 22;//inches
-	blue_Ys = 17;//inches
+	red_Xs = 14;//inches
+	red_Ys = 3;//inches
+	green_Xs = 1;//inches
+	green_Ys = 0;//inches
+	blue_Xs = 0;//inches
+	blue_Ys = 21;//inches
 
 	guess_Xc = 5;//iniches
-	guess_Yc = 9;//inches
+	guess_Yc = 5;//inches
 
 	blue_k = 58.701;//US customary
 	blue_Fcs = 4.7189;//US customary
@@ -73,7 +73,7 @@ void CNMethod::calculate()
 
 
 	//performs Newton's Method calculations 4 times inorder to determine the center 
-	for (int index = 0; index < 4; index++)
+	for (int index = 0; index < 100; index++)
 	{
 		blue_lambda = blue_Fcs - (blue_k * blue_Los);
 		red_lambda = red_Fcs - (red_k * red_Los);
