@@ -72,7 +72,7 @@ void CNMethod::calculate()
 
 
 
-	//performs Newton's Method calculations 4 times inorder to determine the center 
+	//performs Newton's Method calculations 100 times inorder to determine the center 
 	for (int index = 0; index < 100; index++)
 	{
 		blue_lambda = blue_Fcs - (blue_k * blue_Los);
