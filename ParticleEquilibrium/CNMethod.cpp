@@ -284,7 +284,7 @@ void CNMethod::input_var()
 			Red_Ls = sqrt(pow((red_Xs - guess_Xc), 2) + pow((red_Ys - guess_Yc), 2));
 			Green_Ls = sqrt(pow((green_Xs - guess_Xc), 2) + pow((green_Ys - guess_Yc), 2));
 		}
-		//convert from ft to inches
+		//convert from ft to inches.
 		blue_Xs = blue_Xs * 12;
 		blue_Ys = blue_Ys * 12;
 
