@@ -121,7 +121,7 @@ void CNMethod::calculate()
 	red_Ts = (red_Fcs + (red_k * (Red_Ls - red_Los)));
 	green_Ts = (green_Fcs + (green_k * (Green_Ls - green_Los)));
 
-	//The angle created by the spring in degrees
+	//The angle created by the spring (Degrees)
 	blue_angle = atan2(blue_Ys - guess_Yc, blue_Xs - guess_Xc) * 180 / PI;
 	red_angle = atan2(red_Ys - guess_Yc, red_Xs - guess_Xc) * 180 / PI;
 	green_angle = atan2(green_Ys - guess_Yc, green_Xs - guess_Xc) * 180 / PI;
