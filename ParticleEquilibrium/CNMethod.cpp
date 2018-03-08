@@ -117,14 +117,14 @@ void CNMethod::calculate()
 	}
 
 	//The force in the springs (lbf)
-	blue_Ts = (blue_Fcs + (blue_k * (Blue_Ls - blue_Los)));
+	blue_Ts = (blue_k * (Blue_Ls - blue_Los));
 	red_Ts = (red_Fcs + (red_k * (Red_Ls - red_Los)));
 	green_Ts = (green_Fcs + (green_k * (Green_Ls - green_Los)));
 
 	//The angle created by the spring in degrees
-	blue_angle = acos((blue_Xs - guess_Xc) / Blue_Ls) * 180.0 / PI;
-	red_angle = acos((red_Xs - guess_Xc) / Red_Ls) * 180.0 / PI;
-	green_angle = acos((green_Xs - guess_Xc) / Green_Ls) * 180.0 / PI;
+	blue_angle = atan2(blue_Ys - guess_Yc, blue_Xs - guess_Xc) * 180 / PI;
+	red_angle = atan2(red_Ys - guess_Yc, red_Xs - guess_Xc) * 180 / PI;
+	green_angle = atan2(green_Ys - guess_Yc, green_Xs - guess_Xc) * 180 / PI;
 
 	//convert from ft to inches
 	blue_Xs = blue_Xs * 12;
@@ -397,6 +397,7 @@ void CNMethod::test()
 		guess_Xc = guess_Xcm;
 		guess_Yc = guess_Ycm;
 		*/
+
 	}
 	cout << "it works!!";
 	while(1);
