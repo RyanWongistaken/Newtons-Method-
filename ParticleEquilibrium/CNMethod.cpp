@@ -5,7 +5,7 @@
 *
 * @param no input parameter
 * @return returns nothing
-*/
+*//
 CNMethod::CNMethod()
 {
 	//Sets the default values for the inputs
