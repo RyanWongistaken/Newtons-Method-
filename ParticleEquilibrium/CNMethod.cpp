@@ -117,9 +117,9 @@ void CNMethod::calculate()
 	}
 
 	//The force in the springs (lbf)
-	blue_Ts = (blue_k * (Blue_Ls - blue_Los));
-	red_Ts = (red_Fcs + (red_k * (Red_Ls - red_Los)));
-	green_Ts = (green_Fcs + (green_k * (Green_Ls - green_Los)));
+	blue_Ts = (blue_k * (Blue_Ls - blue_Los)) / 7.9333;
+	red_Ts = (red_Fcs + (red_k * (Red_Ls - red_Los))) / 7.9333;
+	green_Ts = (green_Fcs + (green_k * (Green_Ls - green_Los))) / 7.9333;
 
 	//The angle created by the spring (Degrees)
 	blue_angle = atan2(blue_Ys - guess_Yc, blue_Xs - guess_Xc) * 180 / PI;
