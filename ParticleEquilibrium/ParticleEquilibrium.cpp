@@ -1,5 +1,11 @@
-// ParticleEquilibrium.cpp : Defines the entry point for the console application.
+////////////////////////////////////////////////////////////////
+// 
+// Author: Ryan Wong 
+// Date Modified: 1-13-2020
+// Desc: Using Newton's Method to determine force on one point
+//		 utilizing US Customary Units converting to metric
 //
+////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
 #include "CNMethod.h"
@@ -7,14 +13,13 @@
 int main()
 {
 	using namespace std;
-	CNMethod Newton;
-	Newton.main_menu();
+	CNMethod Newton;// Create Object
+	Newton.main_menu(); // Launch the main menu
 	char option;
 	int end = 0;
 	//Newton.test();
 	while (end == 0)
 	{
-
 		cin >> option;
 		if (option == 'E' || option == 'e')
 		{
